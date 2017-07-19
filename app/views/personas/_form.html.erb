@@ -1,0 +1,37 @@
+<%= form_with(model: persona, local: true) do |form| %>
+  <% if persona.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(persona.errors.count, "error") %> prohibited this persona from being saved:</h2>
+
+      <ul>
+      <% persona.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nombre %>
+    <%= form.text_field :nombre, id: :persona_nombre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :apellido %>
+    <%= form.text_field :apellido, id: :persona_apellido %>
+  </div>
+
+  <div class="field">
+    <%= form.label :edad %>
+    <%= form.number_field :edad, id: :persona_edad %>
+  </div>
+
+  <div class="field">
+    <%= form.label :otro %>
+    <%= form.text_field :otro, id: :persona_otro %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

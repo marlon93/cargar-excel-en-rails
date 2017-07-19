@@ -57,3 +57,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #mias
 gem 'jquery-rails'
 gem 'roo'
+gem 'roo-xls'

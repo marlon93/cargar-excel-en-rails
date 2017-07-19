@@ -1,24 +1,19 @@
-# README
+def load_imported_personas
+  #spreadsheet = open_spreadsheet
+  header = spreadsheet.row(1)
+  
+  (2..spreadsheet.last_row).map do |i|
+    
+    # en row esta el hash que viene del excel
+    # ejemplo: {"id"=>nil, "nombre"=>"carlos", "apellido"=>"gonzalez", "edad"=>"24"}
+    row = Hash[[header, spreadsheet.row(i)].transpose]
+    
+    # en persona se guarda el objeto persona que se filtra por el id
+    # y si no existe se instancia uno nuevo
+    persona = Persona.find_by_id(row["id"]) || Persona.new
+    
+    # Aca se concatenan los valores de row con la persona (sea nueva o existente)
+    persona.attributes = Hash[row.map{ |k, v| [k.to_sym, v] }]
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  end
+end

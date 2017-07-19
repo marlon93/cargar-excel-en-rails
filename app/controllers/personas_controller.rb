@@ -7,17 +7,26 @@ class PersonasController < ApplicationController
     @personas = Persona.all
   end
   
+  
+  def vista_subir_excel
+
+  end
+  
   def import_from_excel
     file = params[:file]
     begin
-
-    Persona.subir_excel(file)
-    
-    flash[:notice] = "Records Importados"
-    redirect_to personas_path
-
+      errores_o_true = Persona.subir_excel(file)
+      
+      respond_to do |format|
+        if errores_o_true == true
+          format.html { redirect_to personas_path, notice: 'Records Importados' }
+          format.json { render :show, status: :created, location: @persona }
+        else
+          @errores = errores_o_true
+          format.html { render 'vista_subir_excel'}
+        end
+      end
     rescue Exception => e
-
       flash[:notice] = "Tipo de archivo no valido"
       redirect_to personas_path
     end

@@ -1,5 +1,7 @@
 class Persona < ApplicationRecord
-    
+  
+  validates :nombre, uniqueness: true
+  
   def self.subir_excel(file)
     
     file_ext = File.extname(file.original_filename)
